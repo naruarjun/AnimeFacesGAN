@@ -20,8 +20,6 @@ def lrelu(x, n, leak=0.2):
 
 
 
-    return iamges_batch, num_images
-
 
 def process_data():
 	cur_dir = os.getcwd()
@@ -86,12 +84,7 @@ def generator(input,input_dim,is_train,reuse=False):
 		batch_norm_3 = tf.contrib.layers.batch_norm(conv_3, is_training=is_train, epsilon=1e-5, decay=0.9,
 		                                   updates_collections=None, scope='bn3')
 		act_conv_3 = lrelu(batch_norm_3,"activation_conv_3")
-		# conv_4 = tf.layers.conv2d_transpose(act_conv_3,c5,kernel_size=[5,5],strides=[2,2],padding='SAME',
-		# 									kernel_initializer=tf.truncated_normal_initializer(stddev=0.02),
-		# 									name='conv4')
-		# batch_norm_4 = tf.contrib.layers.batch_norm(conv_4, is_training=is_train, epsilon=1e-5, decay=0.9,
-		#                                    updates_collections=None, scope='bn4')
-		# act_conv_4 = lrelu(batch_norm_4,"activation_conv_4")
+		
 		conv_output = tf.layers.conv2d_transpose(act_conv_3,output_dim,kernel_size=[5,5],strides=[2,2],padding='SAME',
 											kernel_initializer=tf.truncated_normal_initializer(stddev=0.02),
 											name='conv_ouput')
